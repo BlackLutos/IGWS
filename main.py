@@ -80,7 +80,7 @@ if __name__=='__main__':
     os.system('nmcli connection show')
     os.system('ovs-vsctl show')
     # os.system('ryu-manager --verbose --observe-links simple_switch_13_exp.py &') 
-    
+    # test
 
     # ovs-ofctl dump-flows ovs-br0 --protocols=OpenFlow13
     # ip netns exec h1 /bin/bash --rcfile <(echo "PS1=\"namespace h1> \"")
