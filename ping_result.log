@@ -1,0 +1,8 @@
+PING google.com (142.251.42.238) 56(84) bytes of data.
+64 bytes from tsa01s11-in-f14.1e100.net (142.251.42.238): icmp_seq=1 ttl=127 time=3.37 ms
+64 bytes from tsa01s11-in-f14.1e100.net (142.251.42.238): icmp_seq=2 ttl=127 time=4.91 ms
+64 bytes from tsa01s11-in-f14.1e100.net (142.251.42.238): icmp_seq=3 ttl=127 time=7.53 ms
+
+--- google.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 3.374/5.276/7.539/1.720 ms
