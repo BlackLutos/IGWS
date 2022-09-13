@@ -83,8 +83,8 @@ if __name__=='__main__':
     # test
 
     # ovs-ofctl dump-flows ovs-br0 --protocols=OpenFlow13
-    # ip netns exec h1 /bin/bash --rcfile <(echo "PS1=\"namespace h1> \"")
-    # ip netns exec h1 ping google.com -c 3
+    # sudo ip netns exec h1 /bin/bash --rcfile <(echo "PS1=\"namespace h1> \"")
+    # sudo ip netns exec h1 ping google.com -c 3
 
 
 	
