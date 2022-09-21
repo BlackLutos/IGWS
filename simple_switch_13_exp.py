@@ -6,6 +6,11 @@ from ryu.ofproto import ofproto_v1_3
 from ryu.lib.packet import packet
 from ryu.lib.packet import ethernet
 
+from ryu.topology import event
+# Below is the library used for topo discovery
+from ryu.topology.api import get_switch, get_link
+import copy
+
 # ryu-manager --verbose --observe-links simple_switch_13_exp.py
 class SimpleSwitch13(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]

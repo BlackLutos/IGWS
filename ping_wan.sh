@@ -1,0 +1,1 @@
+sudo ip netns exec h1 ping google.com -c 3
