@@ -13,7 +13,7 @@ from ryu.topology import event
 from ryu.topology.api import get_switch, get_link
 import copy
 
-# ryu-manager --verbose --observe-links basic_topo.py
+# ryu-manager --observe-links basic_topo.py
 class SimpleSwitch13(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
@@ -138,23 +138,21 @@ class SimpleSwitch13(app_manager.RyuApp):
             print("link",link)  
     @set_ev_cls(event.EventSwitchEnter)
     def handler_switch_enter(self, ev):
-        # # The Function get_switch(self, None) outputs the list of switches.
-        # self.topo_raw_switches = copy.copy(get_switch(self, None))
-        # # The Function get_link(self, None) outputs the list of links.
-        # self.topo_raw_links = copy.copy(get_link(self, None))
-        self.get_topo()
-        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        # """
-        # Now you have saved the links and switches of the topo. So you could do all sort of stuf with them. 
-        # """
+        # The Function get_switch(self, None) outputs the list of switches.
+        self.topo_raw_switches = copy.copy(get_switch(self, None))
+        # The Function get_link(self, None) outputs the list of links.
+        self.topo_raw_links = copy.copy(get_link(self, None))
+        """
+        Now you have saved the links and switches of the topo. So you could do all sort of stuf with them. 
+        """
+        print("~~~~~~~~~~")
+        print(" \t" + "Current Links:")
+        for l in self.topo_raw_links:
+            print (" \t\t" + str(l))
 
-        # print(" \t" + "Current Links:")
-        # for l in self.topo_raw_links:
-        #     print (" \t\t" + str(l))
-
-        # print(" \t" + "Current Switches:")
-        # for s in self.topo_raw_switches:
-        #     print (" \t\t" + str(s))
+        print(" \t" + "Current Switches:")
+        for s in self.topo_raw_switches:
+            print (" \t\t" + str(s))
 
     """
     This event is fired when a switch leaves the topo. i.e. fails.

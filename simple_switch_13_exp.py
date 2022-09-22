@@ -11,7 +11,7 @@ from ryu.topology import event
 from ryu.topology.api import get_switch, get_link
 import copy
 
-# ryu-manager --verbose --observe-links simple_switch_13_exp.py
+# ryu-manager --observe-links simple_switch_13_exp.py
 class SimpleSwitch13(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
