@@ -83,8 +83,9 @@ class SimpleSwitch13(app_manager.RyuApp):
         if ev.msg.msg_len < ev.msg.total_len:
             self.logger.debug("packet truncated: only %s of %s bytes",
                               ev.msg.msg_len, ev.msg.total_len)
-        if len(self.link_to_port)!=0:
-            print(self.link_to_port)
+        # if len(self.link_to_port)!=0:
+        #     print(self.link_to_port)
+        print(self.link_to_port)
         msg = ev.msg
         datapath = msg.datapath
         ofproto = datapath.ofproto

@@ -146,6 +146,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         Now you have saved the links and switches of the topo. So you could do all sort of stuf with them. 
         """
         print("~~~~~~~~~~")
+        # self.get_topo()
         print(" \t" + "Current Links:")
         for l in self.topo_raw_links:
             print (" \t\t" + str(l))
