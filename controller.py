@@ -23,6 +23,9 @@ from ryu.lib.packet import ethernet
 from ryu.lib.packet import ether_types
 from ryu.topology.api import get_link
 from ryu.topology import event, switches
+import json
+
+# sudo ryu-manager --observe-links controller.py
 class SimpleSwitch13(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
@@ -71,10 +74,9 @@ class SimpleSwitch13(app_manager.RyuApp):
         for link in links_list:
             self.link_to_port["s"+str(link.src.dpid)+"[port:"+str(link.src.port_no)+"]"] = \
             "s"+str(link.dst.dpid)+"[port:"+str(link.dst.port_no)+"]"
-
-    @set_ev_cls(event.EventSwitchEnter)
-    def switch_enter(self, ev):
-        self.get_topo()
+        # print(self.link_to_port)
+    # @set_ev_cls(event.EventSwitchEnter)
+    # def switch_enter(self, ev):
 
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def _packet_in_handler(self, ev):
@@ -85,7 +87,12 @@ class SimpleSwitch13(app_manager.RyuApp):
                               ev.msg.msg_len, ev.msg.total_len)
         # if len(self.link_to_port)!=0:
         #     print(self.link_to_port)
-        print(self.link_to_port)
+        self.get_topo()
+        if len(self.link_to_port)!=0:
+            print(self.link_to_port)
+            print(type(self.link_to_port))
+            with open('./wan_detect/link_info.txt', 'w') as link_info:
+                link_info.write(json.dumps(self.link_to_port))
         msg = ev.msg
         datapath = msg.datapath
         ofproto = datapath.ofproto
