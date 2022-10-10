@@ -6,7 +6,29 @@ import datetime
 from datetime import datetime
 from datetime import date
 import os
+from os.path import join, getsize
 
+def getdirsize(dir):
+    size = 0
+    for path,dirs,files in os.walk(dir):
+        for f in files:
+            fp = os.path.join(path, f)
+            size += os.path.getsize(fp)
+        return size
+def clean_log(dir):
+    files = []
+    for file in os.listdir(dir):
+        files.append(file)
+    files.remove('timestamp')
+    files.remove('detail')
+    files.sort()
+    files_num = len(files)
+    size = getdirsize(dir)
+    for i in range(files_num // 2):
+        if size > 100:
+            os.remove(dir + files[i])
+
+dir = ("/home/blacklutos/IGWS/wan_detect/log/")
 # f = open('/home/blacklutos/IGWS/wan_detect/interval.txt','r')
 # interval_time = int(f.read())
 # f.close()
@@ -28,6 +50,8 @@ while True:
         logging.info("Abnormal")
         log_file.write("Abnormal")
     log_file.close()
+    clean_log(dir)
+    
 
     f = open('/home/blacklutos/IGWS/wan_detect/log/timestamp/timestamp.txt','w')
     f.write("wan_state_" + now_time + ".log")
