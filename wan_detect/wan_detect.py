@@ -7,6 +7,7 @@ from datetime import datetime
 from datetime import date
 import os
 from os.path import join, getsize
+import json
 
 def getdirsize(dir):
     size = 0
@@ -15,7 +16,7 @@ def getdirsize(dir):
             fp = os.path.join(path, f)
             size += os.path.getsize(fp)
         return size
-def clean_log(dir):
+def clean_log(dir, size_limit, clean_nums):
     files = []
     for file in os.listdir(dir):
         files.append(file)
@@ -24,8 +25,8 @@ def clean_log(dir):
     files.sort()
     files_num = len(files)
     size = getdirsize(dir)
-    for i in range(files_num // 2):
-        if size > 100:
+    for i in range(files_num // clean_nums):
+        if size > size_limit:
             os.remove(dir + files[i])
 
 dir = ("/home/blacklutos/IGWS/wan_detect/log/")
@@ -41,8 +42,11 @@ while True:
     FORMAT = '%(asctime)s %(levelname)s: %(message)s'
     logging.basicConfig(level=logging.INFO, filename = "/home/blacklutos/IGWS/wan_detect/log/detail/wan_state.log", filemode='a' ,format=FORMAT)
     log_file = open("/home/blacklutos/IGWS/wan_detect/log/wan_state_" + now_time + ".log",'w')
+    
+    with open('config.json') as f:
+        config = json.load(f)
 
-    wan_state = ping('google.com',timeout=10)
+    wan_state = ping('google.com',timeout=config['timeout'])
     if wan_state:
         logging.info("Normal")
         log_file.write("Normal")
@@ -50,14 +54,11 @@ while True:
         logging.info("Abnormal")
         log_file.write("Abnormal")
     log_file.close()
-    clean_log(dir)
+    clean_log(dir, config['size_limit'], config['clean_nums'])
     
 
     f = open('/home/blacklutos/IGWS/wan_detect/log/timestamp/timestamp.txt','w')
     f.write("wan_state_" + now_time + ".log")
     f.close()
 
-    f = open('/home/blacklutos/IGWS/wan_detect/interval.txt','r')
-    interval_time = int(f.read())
-    f.close()
-    time.sleep(interval_time)
+    time.sleep(config['Interval'])
