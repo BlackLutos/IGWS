@@ -43,19 +43,25 @@ while True:
     logging.basicConfig(level=logging.INFO, filename = "/home/blacklutos/IGWS/wan_detect/log/detail/wan_state.log", filemode='a' ,format=FORMAT)
     log_file = open("/home/blacklutos/IGWS/wan_detect/log/wan_state_" + now_time + ".log",'w')
     
-    with open('config.json') as f:
+    with open('/home/blacklutos/IGWS/wan_detect/config.json') as f:
         config = json.load(f)
 
     wan_state = ping('google.com',timeout=config['timeout'])
     if wan_state:
         logging.info("Normal")
         log_file.write("Normal")
+        config['wan_state'] = 'Normal'
+        with open('/home/blacklutos/IGWS/wan_detect/config.json','w') as f:
+            f.write(json.dumps(config))
+
     else:
         logging.info("Abnormal")
         log_file.write("Abnormal")
+        config['wan_state'] = 'Abnormal'
+        with open('/home/blacklutos/IGWS/wan_detect/config.json','w') as f:
+            f.write(json.dumps(config))
     log_file.close()
     clean_log(dir, config['size_limit'], config['clean_nums'])
-    
 
     f = open('/home/blacklutos/IGWS/wan_detect/log/timestamp/timestamp.txt','w')
     f.write("wan_state_" + now_time + ".log")

@@ -1,6 +1,7 @@
 import select
 import socket
-
+import json
+from failover import failover
 
 def start_server(port):
     HOST = '0.0.0.0'
@@ -26,6 +27,20 @@ def start_server(port):
                 if data:
                     # 已经从这个socket当中收到数据, 如果你想写, 那么就将其加入到outputs中, 等到select模型检查它是否可写
                     print(data.decode(encoding='utf-8'))
+                    info = data.decode(encoding='utf-8')
+                    print('-------------------------------')
+                    with open('config.json','r') as f:
+                        config = json.load(f)
+                    if (('Wan_State:Abnormal' in info) & (config['wan_state'] == 'Abnormal')):
+                        info = info.split(',',4)
+                        wan_state = (info[0].split(':',1))[1]
+                        bridge_ip = (info[1].split(' ',3))[3]
+                        with open('config.json','r') as f:
+                            config = json.load(f)
+                        config['wan_state'] = 'failover'
+                        with open('config.json','w') as f:
+                            f.write(json.dumps(config))
+                        failover()
                     if s not in outputs:
                         outputs.append(s)
                 else:

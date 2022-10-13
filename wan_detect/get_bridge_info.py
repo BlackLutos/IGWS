@@ -1,7 +1,10 @@
 import netifaces as ni
 
 def get_bridge_ip():
-    ip = ni.ifaddresses('br0')[ni.AF_INET][0]['addr']
+    try:
+        ip = ni.ifaddresses('br0')[ni.AF_INET][0]['addr']
+    except:
+        ip = '0.0.0.0'
     # print(ip)  # should print "192.168.0.1"
     ip_info = open('bridge_info','w')
     ip_info.write(ip)

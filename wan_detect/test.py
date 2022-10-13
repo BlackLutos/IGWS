@@ -1,4 +1,7 @@
-from get_bridge_info import get_link_info
+import json
 
-link_info = get_link_info()
-print(link_info)
+with open('config.json','r') as f:
+    config = json.load(f)
+config['Interval'] = 3
+with open('config.json','w') as f:
+    f.write(json.dumps(config))
