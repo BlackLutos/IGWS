@@ -1,4 +1,4 @@
-import json
+from ping3 import ping, verbose_ping
 
 with open('config.json','r') as f:
     config = json.load(f)

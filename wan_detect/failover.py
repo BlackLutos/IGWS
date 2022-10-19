@@ -65,8 +65,11 @@ def failover():
     os.system('ifconfig br0 0')
     os.system('ifconfig ovs-br1 192.168.0.1/24 up')
     os.system('ifconfig ' + eth_port + ' up')
-    # os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=' + eth_port + ',actions=NORMAL')
-    # os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=LOCAL,actions=output:'+ eth_port)
+
+    os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=' + eth_port + ',actions=output:ovs-br0-eth1')
+    os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=ovs-br0-eth1,actions=output:'+ eth_port)
+    os.system('ovs-ofctl add-flow ovs-br1 priority=1,in_port=ovs-br1-eth1'',actions=NORMAL')
+    os.system('ovs-ofctl add-flow ovs-br1 priority=1,in_port=LOCAL,actions=output:ovs-br1-eth1')
     
     #add flow
     # os.system('nmcli connection show')
