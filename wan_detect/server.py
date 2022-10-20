@@ -37,7 +37,7 @@ def start_server(port):
                         bridge_ip = (info[1].split(' ',3))[3]
                         with open('config.json','r') as f:
                             config = json.load(f)
-                        config['wan_state'] = 'Normal' 
+                        config['wan_state'] = 'Failover' 
                         with open('config.json','w') as f:
                             f.write(json.dumps(config))
                         failover()
