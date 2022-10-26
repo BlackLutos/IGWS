@@ -5,7 +5,7 @@ import requests
 
 def get_if_port(if_name):
     if_port = os.popen('sudo ovs-vsctl list interface | grep ' + if_name + ' -A 1 | tail -n 1 | awk \'{print $(NF)}\'').read()
-    if_port = if_port.split('\n')[0 ]
+    if_port = if_port.split('\n')[0]
     return int(if_port)
 
 def add_flow():
