@@ -11,5 +11,5 @@ def get_bridge_ip():
     ip_info.close() 
     return ip
 def get_link_info():
-    with open('/home/blacklutos/IGWS/wan_detect/link_info.txt', 'r') as link_info:
+    with open('/home/blacklutos/IGWS/wan_detect/link_info.json', 'r') as link_info:
         return link_info.readline()

@@ -1,0 +1,1 @@
+{"dpid": "208959191697738", "priority": "32765", "actions": [{"type": "OUTPUT", "port": "NORMAL"}], "match": {"in_port": 1}}
