@@ -2,7 +2,8 @@ import os
 import sh
 import glob
 import json
-from add_flow import flow
+from add_flow import add_flow
+import time
 def get_br_port():
     # port = 'bridge-slave-br-' + input_port
     data = glob.glob(r"/etc/NetworkManager/system-connections/*")
@@ -67,6 +68,7 @@ def failover():
     os.system('ifconfig ' + eth_port + ' up')
 
     add_flow()
+    time.sleep(3)
     sh.bash('add_flow.sh')
     # os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=' + eth_port + ',actions=output:ovs-br0-eth1')
     # os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=ovs-br0-eth1,actions=output:'+ eth_port)

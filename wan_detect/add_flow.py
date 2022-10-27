@@ -9,7 +9,7 @@ def get_if_port(if_name):
     return int(if_port)
 
 def add_flow():
-    with open('wan_detect/link_info.json') as f:
+    with open('link_info.json') as f:
         link_info = json.load(f)
     with open('flow1.json') as f:
         flow1 = json.load(f)
