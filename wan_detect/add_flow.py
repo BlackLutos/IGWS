@@ -51,9 +51,9 @@ def add_flow():
     with open('flow4.json','w') as f:
         f.write(json.dumps(flow4))
 
-# if __name__=='__main__':
-#     add_flow()
-#     sh.bash('add_flow.sh')
+if __name__=='__main__':
+    add_flow()
+    # sh.bash('add_flow.sh')
 
 # sh.curl('-X POST -H 'Content-Type: application/json' -d @flow1.json http://127.0.0.1:8080/stats/flowentry/add')
 # sh.curl(' -X POST -H \'Content-Type: application/json\' -d @flow2.json http://127.0.0.1:8080/stats/flowentry/add')
