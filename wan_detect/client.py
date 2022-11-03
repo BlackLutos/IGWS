@@ -4,6 +4,8 @@ import socket
 from monitor_wan_state import get_wan_state
 from get_bridge_info import get_bridge_ip
 from get_bridge_info import get_link_info
+import json
+from failover import failover
 
 def start_client(addr, port):
     PLC_ADDR = addr
@@ -13,17 +15,30 @@ def start_client(addr, port):
     count = 0
     pid = str(os.getpid())
     while True:
-        if get_wan_state() == True:
+        if get_wan_state() == "Normal":
             msg = 'Wan_State:Normal' + ", pid: " + pid
-        else:
+        elif get_wan_state() == "Abnormal":
             bridge_ip = get_bridge_ip()
             link_info = get_link_info()
             msg = 'Wan_State:Abnormal, ' + 'bridge IP: ' + bridge_ip + ', link_info: ' + link_info + ", pid: " + pid
+        else:
+            msg = 'Wan_State:Failover, pid: ' + pid
+
 
         msg = msg.encode(encoding='utf-8')
         s.send(msg)
         recv_data = s.recv(1024)
-        print(recv_data.decode(encoding='utf-8'))
+        if 'Normal' in str(recv_data):
+            print(recv_data.decode(encoding='utf-8'))
+        elif 'Failover' in str(recv_data):
+            print('abnormal')
+            print(recv_data.decode(encoding='utf-8'))
+            with open('config.json','r') as f:
+                config = json.load(f)
+            config['wan_state'] = 'Failover'
+            with open('config.json','w') as f:
+                f.write(json.dumps(config))
+            failover()
         time.sleep(3)
         # count += 1
         # if count > 2000:
@@ -32,4 +47,4 @@ def start_client(addr, port):
     s.close()
 
 if __name__ == '__main__':
-    start_client('127.0.0.1', 8801)
+    start_client('127.0.0.1', 8808)
