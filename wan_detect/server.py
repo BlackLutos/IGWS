@@ -45,7 +45,7 @@ def start_server(port):
                     if ('Wan_State:Abnormal' in info):
                         failover_flag = True
                     elif ('Wan_State:Failover' in info):
-                        os.system('bash add_flow.sh')
+                        os.system('sh add_flow.sh')
                         # print('Failover')
 
 
@@ -55,6 +55,7 @@ def start_server(port):
                     if s in outputs:
                         outputs.remove(s)
                     inputs.remove(s)
+                    print(inputs)
                     s.close()
 
         
@@ -73,4 +74,4 @@ def start_server(port):
         #     s.close()
 
 if __name__ == '__main__':
-    start_server(8808)
+    start_server(8838)

@@ -68,8 +68,9 @@ def failover():
     os.system('ifconfig ' + eth_port + ' up')
 
     add_flow()
-    time.sleep(3)
-    sh.bash('add_flow.sh')
+    # time.sleep(5)
+    # sh.bash('add_flow.sh')
+    
     # os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=' + eth_port + ',actions=output:ovs-br0-eth1')
     # os.system('ovs-ofctl add-flow ovs-br0 priority=1,in_port=ovs-br0-eth1,actions=output:'+ eth_port)
     # os.system('ovs-ofctl add-flow ovs-br1 priority=1,in_port=ovs-br1-eth1'',actions=NORMAL')
