@@ -1,9 +1,9 @@
 # IGWS For internship in [O’PRUEBA](https://www.oprueba.com/)
 
 ### Streamlined SOP for testing
-``
+```
 sudo python3 create.py ==> cd wan_detect ==> change the value of config.json ==> sudo python3 server.py ==> sudo python3 client.py
-``
+```
 ### The following are the details ↓
 
 ### Create Topology & Envirment
