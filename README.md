@@ -1,6 +1,5 @@
 # IGWS For internship in [O’PRUEBA](https://www.oprueba.com/)
-<img width="451" alt="image" src="https://user-images.githubusercontent.com/8721804/203735502-8222cb7d-05b5-41ba-bb5d-d8d15ae3e2ed.png">
-<img width="541" alt="image" src="https://user-images.githubusercontent.com/8721804/203735372-ba2b807b-a8d5-4376-ade7-b4c9c293938a.png">
+![未命名绘图 drawio](https://user-images.githubusercontent.com/8721804/203736202-765be3f9-a4dd-4090-b368-a78534e6f890.png)
 
 ### Streamlined SOP for testing
 ``
