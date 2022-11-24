@@ -1,0 +1,1 @@
+{"Interval": 10, "timeout": 10, "size_limit": 100, "clean_nums": 2, "wan_state": "Normal", "ovs_port_select": "eth0"}

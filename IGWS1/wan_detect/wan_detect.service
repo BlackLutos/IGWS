@@ -1,0 +1,10 @@
+[Unit]
+Description=Wan detect service
+After=multi-user.target
+[Service]
+Type=simple
+Restart=always
+RestartSec=0
+ExecStart=/usr/bin/python3 /home/pi/IGWS/IGWS1/wan_detect/wan_detect.py
+[Install]
+WantedBy=multi-user.target
